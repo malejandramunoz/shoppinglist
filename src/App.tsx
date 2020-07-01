@@ -27,7 +27,6 @@ class App extends React.Component<{}, AppState> {
       <div className="App">
         <h2>Shopping List</h2>
         <ul>
-          
           {this.state.items.map((item) => (
             <li><input type="checkbox" />&nbsp;<label>
              {item.name}
