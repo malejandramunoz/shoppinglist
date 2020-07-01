@@ -41,7 +41,7 @@ class App extends React.Component<{}, AppState> {
           <tr>
             <td>
               Adding to the list
-              <form onSubmit={this.submitHandler}>
+              <form id="resetting" onSubmit={this.submitHandler}>
                 <input
                   type="text"
                   placeholder="Enter name"
@@ -59,7 +59,7 @@ class App extends React.Component<{}, AppState> {
                   placeholder="Enter the quantity"
                   onChange={this.changeInputQuantity}
                 />
-                <br /> <button type="submit">Add to list</button>
+                <br /> <button type="submit" onClick={this.reset}>Add to list</button>
               </form>
             </td>
             <td>
@@ -71,13 +71,22 @@ class App extends React.Component<{}, AppState> {
                   onChange={this.deleteName}/>
                   <br/>
                   <button type="submit">Delete item</button>
+                  
               </form>
             </td>
           </tr>
+  
         </table>
       </div>
+      
     );
+
   }
+  private reset = (event: React.MouseEvent<HTMLButtonElement>) =>{
+    
+  }
+ 
+  
   private inputName = "";
   private changeInputName = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.inputName = event.target.value;
@@ -107,6 +116,7 @@ class App extends React.Component<{}, AppState> {
     this.setState({
       items: this.state.items.concat(newItem),
     });
+    
   };
 
   private nameToCrossoff = "";
