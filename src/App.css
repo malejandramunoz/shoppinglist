@@ -36,7 +36,7 @@
     transform: rotate(360deg);
   }
 }
-
+/* stylizing the text */
 h2 {
   font-size: xx-large;
   font-family: monospace;
@@ -44,13 +44,16 @@ h2 {
   padding-bottom: 0px;
 }
 
+
+
+
 /* stylizing the lists */
 ul {
   font-size: medium;
   background: #ff9999;
   padding: 20px;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin: 10px;
+  list-style: none;
 }
 ul li {
   background: #ffe5e5;
@@ -68,6 +71,12 @@ input {
 input:focus {
   border: 3px solid #ff9999;
 }
+
+/* checking the things off the list */
+input:checked + label {
+  opacity: 0.2;
+}
+
 /* stylizing the bottons */
 button {
   background-color: #ffe5e5; 
@@ -82,7 +91,18 @@ button {
   cursor: pointer;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
+  border-radius: 15px;
 }
-.button:hover {
+button:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/* stylizing the table */
+table {
+  margin-left:auto; 
+  margin-right:auto;
+}
+td{
+  color: #ff9999;
+  font-size: medium;
 }

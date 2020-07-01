@@ -1,10 +1,10 @@
-import React from 'react';
-import './App.css';
-
+import React from "react";
+import "./App.css";
 
 class ShoppingItem {
   public name = "";
-  public price = "";
+  public price = 0.0;
+  public quantity = 0;
 }
 
 interface AppState {
@@ -14,24 +14,68 @@ interface AppState {
 class App extends React.Component<{}, AppState> {
   constructor(props: any, state: AppState) {
     super(props, state);
-    this.state = {items: []};
+    const milk: ShoppingItem ={
+      name: "Milk",
+      price: 4.5,
+      quantity: 1
+    }
+    this.state = { items: [milk] };
   }
 
   public render() {
     return (
       <div className="App">
-
-          <h2>Shopping List</h2>
-          <ul>
-          {this.state.items.map(item => (
-            <li>{item.name}  {item.price}</li>
+        <h2>Shopping List</h2>
+        <ul>
+          
+          {this.state.items.map((item) => (
+            <li><input type="checkbox" />&nbsp;<label>
+             {item.name}
+              <br />
+              Price: ${item.price}
+              <br/>
+              Quantity: {item.quantity}
+            </label></li>
           ))}
-          </ul>
-          <form onSubmit = {this.submitHandler}>
-            <input type="text" placeholder="Enter name"  onChange={this.changeInputName}/>&nbsp;
-            &nbsp;<input type="number" placeholder="Enter the price" onChange={this.changeInputPrice} />
-            <br/> <button type="submit">Add to list</button>
-          </form>
+        </ul>
+        <table>
+          <tr>
+            <td>
+              Adding to the list
+              <form onSubmit={this.submitHandler}>
+                <input
+                  type="text"
+                  placeholder="Enter name"
+                  onChange={this.changeInputName}
+                />
+                <br/>
+                <input
+                  type="float"
+                  placeholder="Enter the price"
+                  onChange={this.changeInputPrice}
+                />
+                <br/>
+                <input
+                  type="number"
+                  placeholder="Enter the quantity"
+                  onChange={this.changeInputQuantity}
+                />
+                <br /> <button type="submit">Add to list</button>
+              </form>
+            </td>
+            <td>
+              To delete at item off the list
+              <form onSubmit={this.deleteHandler}>
+                <input
+                  type="text"
+                  placeholder="Item to delete"
+                  onChange={this.deleteName}/>
+                  <br/>
+                  <button type="submit">Delete item</button>
+              </form>
+            </td>
+          </tr>
+        </table>
       </div>
     );
   }
@@ -47,20 +91,40 @@ class App extends React.Component<{}, AppState> {
     //console.log("Entering input price" + this.inputPrice);
   };
 
-  submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
+  private inputQuantity = "";
+  private changeInputQuantity = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.inputQuantity = event.target.value;
+    //console.log("Entering input quantity" + this.inputQuantity);
+  };
+
+  private submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     //console.log("Entering")
     const newItem: ShoppingItem = {
       name: this.inputName,
-      price: this.inputPrice
-    }
+      price: parseFloat(this.inputPrice),
+      quantity: parseInt(this.inputQuantity)
+    };
     this.setState({
-      items: this.state.items.concat(newItem)
+      items: this.state.items.concat(newItem),
     });
-  
   };
+
+  private nameToCrossoff = "";
+  private crossoffName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.nameToCrossoff = event.target.value;
+  };
+  private crossoffHandler = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+  };
+
+  private nameToDelete = "";
+  private deleteName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.nameToDelete = event.target.value;
+  };
+  private deleteHandler = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+  }
 }
-
-
 
 export default App;
