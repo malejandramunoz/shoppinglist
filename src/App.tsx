@@ -14,11 +14,11 @@ interface AppState {
 class App extends React.Component<{}, AppState> {
   constructor(props: any, state: AppState) {
     super(props, state);
-    const milk: ShoppingItem ={
+    const milk: ShoppingItem = {
       name: "Milk",
       price: 4.5,
-      quantity: 1
-    }
+      quantity: 1,
+    };
     this.state = { items: [milk] };
   }
 
@@ -28,13 +28,17 @@ class App extends React.Component<{}, AppState> {
         <h2>Shopping List</h2>
         <ul>
           {this.state.items.map((item) => (
-            <li><input type="checkbox" />&nbsp;<label>
-             {item.name}
-              <br />
-              Price: ${item.price}
-              <br/>
-              Quantity: {item.quantity}
-            </label></li>
+            <li>
+              <input type="checkbox" />
+              &nbsp;
+              <label>
+                {item.name}
+                <br />
+                Price: ${item.price}
+                <br />
+                Quantity: {item.quantity}
+              </label>
+            </li>
           ))}
         </ul>
         <table>
@@ -47,19 +51,20 @@ class App extends React.Component<{}, AppState> {
                   placeholder="Enter name"
                   onChange={this.changeInputName}
                 />
-                <br/>
+                <br />
                 <input
                   type="float"
                   placeholder="Enter the price"
                   onChange={this.changeInputPrice}
                 />
-                <br/>
+                <br />
                 <input
                   type="number"
                   placeholder="Enter the quantity"
                   onChange={this.changeInputQuantity}
                 />
-                <br /> <button type="submit" onClick={this.reset}>Add to list</button>
+                <br /> <button type="submit">Add to list</button>
+                <br /><button type="reset">Tap to reset input</button>
               </form>
             </td>
             <td>
@@ -68,25 +73,18 @@ class App extends React.Component<{}, AppState> {
                 <input
                   type="text"
                   placeholder="Item to delete"
-                  onChange={this.deleteName}/>
-                  <br/>
-                  <button type="submit">Delete item</button>
-                  
+                  onChange={this.deleteName}
+                />
+                <br />
+                <button type="submit">Delete item</button>
               </form>
             </td>
           </tr>
-  
         </table>
       </div>
-      
     );
+  }
 
-  }
-  private reset = (event: React.MouseEvent<HTMLButtonElement>) =>{
-    
-  }
- 
-  
   private inputName = "";
   private changeInputName = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.inputName = event.target.value;
@@ -100,7 +98,9 @@ class App extends React.Component<{}, AppState> {
   };
 
   private inputQuantity = "";
-  private changeInputQuantity = (event: React.ChangeEvent<HTMLInputElement>) => {
+  private changeInputQuantity = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     this.inputQuantity = event.target.value;
     //console.log("Entering input quantity" + this.inputQuantity);
   };
@@ -111,12 +111,11 @@ class App extends React.Component<{}, AppState> {
     const newItem: ShoppingItem = {
       name: this.inputName,
       price: parseFloat(this.inputPrice),
-      quantity: parseInt(this.inputQuantity)
+      quantity: parseInt(this.inputQuantity),
     };
     this.setState({
       items: this.state.items.concat(newItem),
     });
-    
   };
 
   private nameToCrossoff = "";
@@ -133,7 +132,7 @@ class App extends React.Component<{}, AppState> {
   };
   private deleteHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-  }
+  };
 }
 
 export default App;
