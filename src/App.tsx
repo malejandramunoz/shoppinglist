@@ -4,7 +4,7 @@ import './App.css';
 
 class ShoppingItem {
   public name = "";
-  public price = 0.0;
+  public price = "";
 }
 
 interface AppState {
@@ -20,8 +20,8 @@ class App extends React.Component<{}, AppState> {
   public render() {
     return (
       <div className="App">
-        <header className="App-header">
-          Shopping List
+
+          <h2>Shopping List</h2>
           <ul>
           {this.state.items.map(item => (
             <li>{item.name}  {item.price}</li>
@@ -30,9 +30,8 @@ class App extends React.Component<{}, AppState> {
           <form onSubmit = {this.submitHandler}>
             <input type="text" placeholder="Enter name"  onChange={this.changeInputName}/>&nbsp;
             &nbsp;<input type="number" placeholder="Enter the price" onChange={this.changeInputPrice} />
-            <br/> <button type="submit">Add</button>
+            <br/> <button type="submit">Add to list</button>
           </form>
-        </header>
       </div>
     );
   }
@@ -53,11 +52,12 @@ class App extends React.Component<{}, AppState> {
     //console.log("Entering")
     const newItem: ShoppingItem = {
       name: this.inputName,
-      price: parseFloat(this.inputPrice)
+      price: this.inputPrice
     }
     this.setState({
       items: this.state.items.concat(newItem)
     });
+  
   };
 }
 
